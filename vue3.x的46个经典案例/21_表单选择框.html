@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Vue 测试实例</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+<div id="v-model-select" class="demo">
+  <select v-model="selected">
+    <option disabled value="">Please select one</option>
+    <option>A</option>
+    <option>B</option>
+    <option>C</option>
+  </select>
+  <span>Selected: {{ selected }}</span>
+
+<!--&lt;!&ndash;  多选时 (绑定到一个数组)：&ndash;&gt;-->
+<!--  <select v-model="selected" multiple>-->
+<!--    <option>A</option>-->
+<!--    <option>B</option>-->
+<!--    <option>C</option>-->
+<!--    <option>D</option>-->
+<!--  </select>-->
+<!--  <br />-->
+<!--  <span>Selected: {{ selected }}</span>-->
+</div>
+
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        selected: ''
+      }
+    }
+  }).mount('#v-model-select')
+</script>
+</body>
+</html>
+

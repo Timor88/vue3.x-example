@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Vue 测试实例</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<style>
+  #demo {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .movearea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 6vmin;
+    transition: 0.2s background-color ease;
+  }
+</style>
+
+<body>
+<div id="demo">
+  <div @mousemove="xCoordinate"
+       :style="{ backgroundColor: `hsl(${x}, 80%, 50%)` }"
+       class="movearea">
+    <h3>请移动鼠标...</h3>
+    <p>x: {{x}}</p>
+  </div>
+</div>
+
+
+<script>
+  const Demo = {
+    data() {
+      return {
+        x: 0
+      }
+    },
+    methods: {
+      xCoordinate(e) {
+        this.x = e.clientX;
+      }
+    }
+  }
+
+  Vue.createApp(Demo).mount('#demo')
+</script>
+</body>
+</html>
+

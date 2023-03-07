@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Vue 测试实例</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+<ul id="v-for-object" class="demo">
+  <li v-for="value in myObject">
+    {{ value }}
+  </li>
+
+  <P>也可以提供第二个的参数为 property 名称 (也就是键名 key)：</P>
+  <li v-for="(value, name) in myObject">
+    {{ name }}: {{ value }}
+  </li>
+
+  <P>还可以用第三个参数作为索引：</P>
+  <li v-for="(value, name, index) in myObject">
+    {{ index }}. {{ name }}: {{ value }}
+  </li>
+</ul>
+
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        myObject: {
+          title: 'How to do lists in Vue',
+          author: 'Jane Doe',
+          publishedAt: '2020-03-22'
+        }
+      }
+    }
+  }).mount('#v-for-object')
+</script>
+</body>
+</html>

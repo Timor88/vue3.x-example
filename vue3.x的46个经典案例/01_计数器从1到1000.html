@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue 测试实例</title>
+<script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="counter">
+  Counter: {{ counter }}
+</div>
+
+<script>
+  const Counter = {
+    data() {
+      return {
+        counter: 99
+      }
+    },
+    mounted() {
+      setInterval(() => {
+        this.counter++
+      }, 10)
+    }
+  }
+
+Vue.createApp(Counter).mount('#counter')
+</script>
+</body>
+</html>

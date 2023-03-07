@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Vue 测试实例</title>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
+</head>
+
+<style>
+  .demo {
+    font-family: sans-serif;
+    border: 1px solid #eee;
+    border-radius: 2px;
+    padding: 20px 30px;
+    margin-top: 1em;
+    margin-bottom: 40px;
+    user-select: none;
+    overflow-x: auto;
+  }
+
+  .full-page {
+    height: 100vh
+  }
+
+</style>
+
+<body>
+<div id="dynamic-arguments-example" class="demo full-page">
+  <h2>Scroll down the page</h2>
+  <input type="range" min="0" max="500" v-model="pinPadding">
+  <p v-pin:[direction]="pinPadding">Stick me {{pinPadding}}px from the {{ direction }} of the page</p>
+</div>
+
+
+<script>
+  const app = Vue.createApp({
+    data() {
+      return {
+        direction: 'right',
+        pinPadding: 200,
+      }
+    }
+  });
+
+  app.directive('pin', {
+    mounted(el, binding) {
+      el.style.position = 'fixed'
+      const s = binding.arg || 'top'
+      el.style[s] = binding.value + 'px'
+    },
+    updated(el, binding) {
+      const s = binding.arg || 'top'
+      el.style[s] = binding.value + 'px'
+    }
+  })
+
+  app.mount('#dynamic-arguments-example')
+</script>
+</body>
+</html>
+

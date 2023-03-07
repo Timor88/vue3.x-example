@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Vue 测试实例</title>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
+</head>
+
+<style>
+  body {
+    margin: 30px;
+  }
+
+</style>
+
+<body>
+<div id="app">
+  <input v-model.number="firstNumber" type="number" step="20"> +
+  <input v-model.number="secondNumber" type="number" step="20"> =
+  {{ result }}
+  <p>
+    <animated-integer :value="firstNumber"></animated-integer> +
+    <animated-integer :value="secondNumber"></animated-integer> =
+    <animated-integer :value="result"></animated-integer>
+  </p>
+</div>
+
+
+<script>
+  const app = Vue.createApp({
+    data() {
+      return {
+        firstNumber: 20,
+        secondNumber: 40
+      }
+    },
+    computed: {
+      result() {
+        return this.firstNumber + this.secondNumber
+      }
+    }
+  })
+
+  app.component('animated-integer', {
+    template: '<span>{{ fullValue }}</span>',
+    props: {
+      value: {
+        type: Number,
+        required: true
+      }
+    },
+    data() {
+      return {
+        tweeningValue: 0
+      }
+    },
+    computed: {
+      fullValue() {
+        return Math.floor(this.tweeningValue)
+      }
+    },
+    methods: {
+      tween(newValue, oldValue) {
+        gsap.to(this.$data, {
+          duration: 0.5,
+          tweeningValue: newValue,
+          ease: 'sine'
+        });
+      }
+    },
+    watch: {
+      value(newValue, oldValue) {
+        this.tween(newValue, oldValue)
+      }
+    },
+    mounted() {
+      this.tween(this.value, 0)
+    },
+  })
+
+  app.mount('#app')
+</script>
+</body>
+</html>
+
